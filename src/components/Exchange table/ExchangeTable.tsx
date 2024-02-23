@@ -15,18 +15,22 @@ const ExchangeTable: FunctionComponent<ExchangeTableProps> = ({
 }) => {
   return (
     <table className="Exchange-table">
-      <tr>
-        <th>Date</th>
-        <th>EGP</th>
-        <th>CAD</th>
-      </tr>
-      {exchangeRows.map((exchangeRow) => (
-        <tr key={exchangeRow.date}>
-          <td>{exchangeRow.date}</td>
-          <td>{exchangeRow.egp}</td>
-          <td>{exchangeRow.cad}</td>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>EGP</th>
+          <th>CAD</th>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {exchangeRows.map((exchangeRow) => (
+          <tr key={exchangeRow.date}>
+            <td>{exchangeRow.date}</td>
+            <td>{exchangeRow.egp}</td>
+            <td>{exchangeRow.cad}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };
