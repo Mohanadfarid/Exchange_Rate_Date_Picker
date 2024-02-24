@@ -1,4 +1,5 @@
 import "./App.scss";
+import DatePicker from "./components/Date picker/DatePicker";
 import ExchangeTable, {
   ExchangeRow,
 } from "./components/Exchange table/ExchangeTable";
@@ -11,9 +12,10 @@ function App() {
   ];
 
   return (
-    <div>
+    <>
+      <DatePicker />
       <ExchangeTable exchangeRows={exchangeRowsDataPlaceHolder} />
-    </div>
+    </>
   );
 }
 

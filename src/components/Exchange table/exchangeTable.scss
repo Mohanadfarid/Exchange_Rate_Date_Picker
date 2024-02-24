@@ -1,5 +1,5 @@
 .Exchange-table {
-  width: 300px;
+  width: 400px;
   border-collapse: collapse;
   border: 2px solid black;
   td,
@@ -11,8 +11,8 @@
   tr:nth-of-type(even) {
     background-color: rgb(238, 236, 236);
   }
-
-  tr:nth-of-type(1) {
+  
+  thead tr {
     background-color: lightgray;
   }
 }

@@ -1,0 +1,15 @@
+.calender {
+  &_month-year-picker {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    border-bottom: 2px solid black;
+  }
+  &_day-picker{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+  }
+  .cell{
+    padding: 5px;
+  }
+}

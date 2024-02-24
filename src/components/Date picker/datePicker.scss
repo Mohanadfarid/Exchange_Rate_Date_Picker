@@ -1,0 +1,10 @@
+.time-range-selector-container {
+  border: 1px solid black;
+  display: flex;
+  margin-bottom: 2px;
+  .date-selector {
+    width: 50%;
+    border: 1px solid black;
+    text-align: center;
+  }
+}
