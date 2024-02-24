@@ -2,14 +2,32 @@
   &_month-year-picker {
     display: flex;
     justify-content: space-between;
-    padding: 5px 15px;
+    padding: 5px 10px;
     border-bottom: 2px solid black;
   }
-  &_day-picker{
+  &_day-picker {
     display: grid;
-    grid-template-columns: repeat(7,1fr);
+    grid-template-columns: repeat(7, 1fr);
   }
-  .cell{
+  .monthes-controller {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 1px;
+    font-weight: bolder;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+  .day-of-week {
+    font-weight: bold;
+  }
+
+  .prefix-cell,
+  .postfix-cell {
+    color: lightgray;
+  }
+  .cell {
     padding: 5px;
   }
 }
