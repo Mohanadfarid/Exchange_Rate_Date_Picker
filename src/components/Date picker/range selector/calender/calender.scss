@@ -29,5 +29,15 @@
   }
   .cell {
     padding: 5px;
+    border-radius: 50%;
+  }
+  .current-month-cell {
+    &:hover {
+      background-color: lightgray;
+      cursor: pointer;
+    }
+    &.active {
+      background-color: lightblue;
+    }
   }
 }

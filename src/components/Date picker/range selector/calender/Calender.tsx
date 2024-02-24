@@ -23,7 +23,10 @@ interface CalenderProps {
   date: DateState;
   changeDateHandler: (year?: number, month?: number, day?: number) => void;
 }
-const Calender: FunctionComponent<CalenderProps> = ({ date }) => {
+const Calender: FunctionComponent<CalenderProps> = ({
+  date,
+  changeDateHandler,
+}) => {
   const numberOfDaysInCurrentMonth = getDaysInMonth(
     new Date(date.year, date.month - 1)
   );
@@ -71,7 +74,15 @@ const Calender: FunctionComponent<CalenderProps> = ({ date }) => {
 
         {/* looping over the days of current month */}
         {Array.from({ length: numberOfDaysInCurrentMonth }).map((_, index) => (
-          <div className="cell" key={index}>
+          <div
+            className={`cell current-month-cell ${
+              index + 1 === date.day && "active"
+            }`}
+            key={index}
+            onClick={() => {
+              changeDateHandler(undefined, undefined, index + 1);
+            }}
+          >
             {index + 1}
           </div>
         ))}
