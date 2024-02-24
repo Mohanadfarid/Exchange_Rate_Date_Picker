@@ -38,12 +38,12 @@ const RangeSelector: FunctionComponent<RangeSelectorProps> = ({
         currentDate.getMonth() + 1,
         currentDate.getDate()
       )
-    ).getDate();
-    
+    );
+
     ChangeStartDateHandler(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      startOfWeekDay
+      startOfWeekDay.getFullYear(),
+      startOfWeekDay.getMonth(),
+      startOfWeekDay.getDate()
     );
   };
 
