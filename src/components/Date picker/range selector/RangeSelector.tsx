@@ -20,18 +20,35 @@ const RangeSelector: FunctionComponent<RangeSelectorProps> = ({
   const currentDate = new Date();
 
   const setRangeToThisYear = () => {
+    //setting the start date to the start of the year
     ChangeStartDateHandler(currentDate.getFullYear(), 1, 1);
+
+    //setting the end date to the current date
+    ChangeEndDateHandler(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      currentDate.getDate()
+    );
   };
 
   const setRangeToThisMonth = () => {
+    //setting the start date to the start of the month
     ChangeStartDateHandler(
       currentDate.getFullYear(),
       currentDate.getMonth() + 1,
       1
     );
+
+    //setting the end date to the current date
+    ChangeEndDateHandler(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      currentDate.getDate()
+    );
   };
 
   const setRangeToThisWeek = () => {
+    //getting the first day of current week
     const startOfWeekDay = startOfWeek(
       new Date(
         currentDate.getFullYear(),
@@ -40,10 +57,18 @@ const RangeSelector: FunctionComponent<RangeSelectorProps> = ({
       )
     );
 
+    //setting the start date to the first day of current week
     ChangeStartDateHandler(
       startOfWeekDay.getFullYear(),
       startOfWeekDay.getMonth(),
       startOfWeekDay.getDate()
+    );
+
+    //setting the end date to the current date
+    ChangeEndDateHandler(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      currentDate.getDate()
     );
   };
 
