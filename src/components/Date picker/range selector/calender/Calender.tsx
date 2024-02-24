@@ -42,14 +42,33 @@ const Calender: FunctionComponent<CalenderProps> = ({
     new Date(date.year, date.month - 2) // -1 to get the right month and another -1 to get the prev month
   );
 
+  const increaseMonthHandler = () => {
+    if (date.month === 12) {
+      changeDateHandler(date.year + 1, 1, undefined);
+    } else {
+      changeDateHandler(undefined, date.month + 1, undefined);
+    }
+  };
+  const decreaseMonthHandler = () => {
+    if (date.month === 1) {
+      changeDateHandler(date.year - 1, 12, undefined);
+    } else {
+      changeDateHandler(undefined, date.month - 1, undefined);
+    }
+  };
+
   return (
     <div className="calender">
       <div className="calender_month-year-picker">
-        <div className="monthes-controller">{"<<"}</div>
+        <div className="monthes-controller" onClick={decreaseMonthHandler}>
+          {"<<"}
+        </div>
         <div>
           {monthsOfYear[date.month - 1]} {date.year}
         </div>
-        <div className="monthes-controller">{">>"}</div>
+        <div className="monthes-controller" onClick={increaseMonthHandler}>
+          {">>"}
+        </div>
       </div>
 
       <div className="calender_day-picker">
