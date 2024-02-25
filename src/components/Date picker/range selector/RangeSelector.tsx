@@ -7,6 +7,7 @@ import { startOfWeek } from "date-fns";
 interface RangeSelectorProps {
   startDate: DateState;
   endDate: DateState;
+  setIsRangeSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   ChangeStartDateHandler: (year?: number, month?: number, day?: number) => void;
   ChangeEndDateHandler: (year?: number, month?: number, day?: number) => void;
 }
@@ -14,6 +15,7 @@ interface RangeSelectorProps {
 const RangeSelector: FunctionComponent<RangeSelectorProps> = ({
   startDate,
   endDate,
+  setIsRangeSelectorOpen,
   ChangeStartDateHandler,
   ChangeEndDateHandler,
 }) => {
@@ -92,6 +94,14 @@ const RangeSelector: FunctionComponent<RangeSelectorProps> = ({
       {/* end date calender */}
       <div className="calender">
         <Calender date={endDate} changeDateHandler={ChangeEndDateHandler} />
+      </div>
+      <div
+        className="close-btn"
+        onClick={() => {
+          setIsRangeSelectorOpen(false);
+        }}
+      >
+        X
       </div>
     </div>
   );

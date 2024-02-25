@@ -20,6 +20,8 @@ const DatePicker: FunctionComponent = () => {
 
   const [startDate, setStartDate] = useState<DateState>(initialDate);
   const [endDate, setEndDate] = useState<DateState>(initialDate);
+  const [isRangeSelectorOpen, setIsRangeSelectorOpen] =
+    useState<boolean>(false);
 
   const ChangeStartDateHandler = (
     year?: number,
@@ -85,18 +87,58 @@ const DatePicker: FunctionComponent = () => {
     });
   };
 
+  // a helper function to create a formated date
+  const dateFormatter = (year: number, month: number, day: number): string => {
+    const formatedDate = new Date(year, month, day).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }
+    );
+    return formatedDate;
+  };
+
+  // checking if the user hasn't picked a date yet
+  const isBothDatesOnDefult =
+    JSON.stringify(initialDate) === JSON.stringify(startDate) &&
+    JSON.stringify(initialDate) == JSON.stringify(endDate);
+
   return (
     <>
       <div className="time-range-selector-container">
-        <div className="date-selector">Start</div>
-        <div className="date-selector">End</div>
+        <div
+          className="date-selector"
+          onClick={() => {
+            setIsRangeSelectorOpen(true);
+          }}
+        >
+          {isBothDatesOnDefult
+            ? "Start"
+            : dateFormatter(startDate.year, startDate.month, startDate.day)}
+        </div>
+
+        <div
+          className="date-selector"
+          onClick={() => {
+            setIsRangeSelectorOpen(true);
+          }}
+        >
+          {isBothDatesOnDefult
+            ? "End"
+            : dateFormatter(endDate.year, endDate.month, endDate.day)}
+        </div>
       </div>
-      <RangeSelector
-        startDate={startDate}
-        endDate={endDate}
-        ChangeStartDateHandler={ChangeStartDateHandler}
-        ChangeEndDateHandler={ChangeEndDateHandler}
-      />
+      {isRangeSelectorOpen && (
+        <RangeSelector
+          setIsRangeSelectorOpen={setIsRangeSelectorOpen}
+          startDate={startDate}
+          endDate={endDate}
+          ChangeStartDateHandler={ChangeStartDateHandler}
+          ChangeEndDateHandler={ChangeEndDateHandler}
+        />
+      )}
     </>
   );
 };

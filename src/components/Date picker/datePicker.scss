@@ -7,5 +7,9 @@
     border: 1px solid black;
     text-align: center;
     padding: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 }
