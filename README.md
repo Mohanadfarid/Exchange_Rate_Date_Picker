@@ -47,7 +47,8 @@ This React TypeScript application allows users to select a start date and an end
 
 ## Configuration
 
-- Update the API access_key in src/config.ts to add your key.
+- Update the API **ACCESS_KEY** const in src/config.ts to add your key.
+- Update the API **END_POINT** in scr/config.ts to change the end point if needed
 
 ## Dependencies
 
