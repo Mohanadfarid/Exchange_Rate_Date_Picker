@@ -15,13 +15,6 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
   ChangeStartDateHandler,
   ChangeEndDateHandler,
 }) => {
-  const currentDate = new Date();
-  const initialDate = {
-    year: currentDate.getFullYear(),
-    month: currentDate.getMonth() + 1,
-    day: currentDate.getDate(),
-  };
-
   const [isRangeSelectorOpen, setIsRangeSelectorOpen] =
     useState<boolean>(false);
 
@@ -38,10 +31,9 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     return formatedDate;
   };
 
-  // checking if the user hasn't picked a date yet
-  const isBothDatesOnDefult =
-    JSON.stringify(initialDate) === JSON.stringify(startDate) &&
-    JSON.stringify(initialDate) == JSON.stringify(endDate);
+  // checking if both dates are  equal
+  const isDatesAreEqual =
+    JSON.stringify(startDate) === JSON.stringify(endDate);
 
   return (
     <>
@@ -52,7 +44,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
             setIsRangeSelectorOpen(true);
           }}
         >
-          {isBothDatesOnDefult
+          {isDatesAreEqual
             ? "Start"
             : dateFormatter(startDate.year, startDate.month, startDate.day)}
         </div>
@@ -63,7 +55,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
             setIsRangeSelectorOpen(true);
           }}
         >
-          {isBothDatesOnDefult
+          {isDatesAreEqual
             ? "End"
             : dateFormatter(endDate.year, endDate.month, endDate.day)}
         </div>

@@ -1,4 +1,4 @@
-import { DateState } from "./components/Date picker/DatePicker";
+import { DateState } from "./App";
 import { ACCESS_KEY, BASE_URL, END_POINT } from "./config";
 
 // Define a TypeScript interface for the expected response structure
@@ -12,15 +12,21 @@ type ApiResponse = {
   source: string;
   quotes: {
     [date: string]: {
-      [currency: string]: number;
+      USDEGP: number;
+      USDCAD: number;
     };
+  };
+  error?: {
+    code: number;
+    type: string;
+    info: string;
   };
 };
 
 export async function fetchExchangeData(
   startDate: DateState,
   endDate: DateState
-): Promise<ApiResponse[]> {
+): Promise<ApiResponse> {
   const startDateApiFormat = `${startDate.year}-${startDate.month}-${startDate.day}`;
   const endDateApiFormat = `${endDate.year}-${endDate.month}-${endDate.day}`;
 
@@ -32,6 +38,10 @@ export async function fetchExchangeData(
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  const data: ApiResponse[] = await response.json();
+  const data: ApiResponse = await response.json();
+
+  if (data.success === false) {
+    throw new Error(data.error?.info);
+  }
   return data;
 }

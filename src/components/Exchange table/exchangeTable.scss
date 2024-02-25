@@ -11,8 +11,16 @@
   tr:nth-of-type(even) {
     background-color: rgb(238, 236, 236);
   }
-  
+
   thead tr {
     background-color: lightgray;
   }
+  .error {
+    text-align: center;
+    color: red;
+  }
+}
+
+.hide-table {
+  display: none;
 }
