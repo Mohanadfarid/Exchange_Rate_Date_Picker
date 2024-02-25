@@ -1,16 +1,20 @@
 import { FunctionComponent, useState } from "react";
 import "./datePicker.scss";
 import RangeSelector from "./range selector/RangeSelector";
-import { differenceInCalendarDays } from "date-fns";
+import { DateState } from "../../App";
 
-export type DateState = {
-  year: number;
-  month: number;
-  day: number;
-};
-
-const DatePicker: FunctionComponent = () => {
-  //inilizing the date of the calenders to the current date
+interface DatePickerProps {
+  startDate: DateState;
+  endDate: DateState;
+  ChangeStartDateHandler: (year?: number, month?: number, day?: number) => void;
+  ChangeEndDateHandler: (year?: number, month?: number, day?: number) => void;
+}
+const DatePicker: FunctionComponent<DatePickerProps> = ({
+  startDate,
+  endDate,
+  ChangeStartDateHandler,
+  ChangeEndDateHandler,
+}) => {
   const currentDate = new Date();
   const initialDate = {
     year: currentDate.getFullYear(),
@@ -18,74 +22,8 @@ const DatePicker: FunctionComponent = () => {
     day: currentDate.getDate(),
   };
 
-  const [startDate, setStartDate] = useState<DateState>(initialDate);
-  const [endDate, setEndDate] = useState<DateState>(initialDate);
   const [isRangeSelectorOpen, setIsRangeSelectorOpen] =
     useState<boolean>(false);
-
-  const ChangeStartDateHandler = (
-    year?: number,
-    month?: number,
-    day?: number
-  ) => {
-    setStartDate((prevState) => {
-      const updatedStartDate = {
-        ...prevState,
-        year: year ?? prevState.year,
-        month: month ?? prevState.month,
-        day: day ?? prevState.day,
-      };
-
-      const isStartDateBeforeEndDate =
-        differenceInCalendarDays(
-          new Date(endDate.year, endDate.month, endDate.day),
-          new Date(
-            updatedStartDate.year,
-            updatedStartDate.month,
-            updatedStartDate.day
-          )
-        ) < 0;
-
-      if (isStartDateBeforeEndDate) {
-        alert("The start date must precede the end date!");
-        return prevState; // Prevent updating start date
-      } else {
-        return updatedStartDate;
-      }
-    });
-  };
-
-  const ChangeEndDateHandler = (
-    year?: number,
-    month?: number,
-    day?: number
-  ) => {
-    setEndDate((prevState) => {
-      const updatedStartDate = {
-        ...prevState,
-        year: year ?? prevState.year,
-        month: month ?? prevState.month,
-        day: day ?? prevState.day,
-      };
-
-      const isStartDateBeforeEndDate =
-        differenceInCalendarDays(
-          new Date(
-            updatedStartDate.year,
-            updatedStartDate.month,
-            updatedStartDate.day
-          ),
-          new Date(startDate.year, startDate.month, startDate.day)
-        ) < 0;
-
-      if (isStartDateBeforeEndDate) {
-        alert("The end date must come after the start date!");
-        return prevState; // Prevent updating start date
-      } else {
-        return updatedStartDate;
-      }
-    });
-  };
 
   // a helper function to create a formated date
   const dateFormatter = (year: number, month: number, day: number): string => {

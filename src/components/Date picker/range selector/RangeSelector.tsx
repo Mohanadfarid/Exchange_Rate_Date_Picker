@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import "./rangeSelector.scss";
 import Calender from "./calender/Calender";
-import { DateState } from "../DatePicker";
 import { startOfWeek } from "date-fns";
+import { DateState } from "../../../App";
 
 interface RangeSelectorProps {
   startDate: DateState;
