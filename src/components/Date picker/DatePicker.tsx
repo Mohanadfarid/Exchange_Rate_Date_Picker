@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import "./datePicker.scss";
 import RangeSelector from "./range selector/RangeSelector";
+import { differenceInCalendarDays } from "date-fns";
 
 export type DateState = {
   year: number;
@@ -26,12 +27,29 @@ const DatePicker: FunctionComponent = () => {
     day?: number
   ) => {
     setStartDate((prevState) => {
-      return {
+      const updatedStartDate = {
         ...prevState,
         year: year ?? prevState.year,
         month: month ?? prevState.month,
         day: day ?? prevState.day,
       };
+
+      const isStartDateBeforeEndDate =
+        differenceInCalendarDays(
+          new Date(endDate.year, endDate.month, endDate.day),
+          new Date(
+            updatedStartDate.year,
+            updatedStartDate.month,
+            updatedStartDate.day
+          )
+        ) < 0;
+
+      if (isStartDateBeforeEndDate) {
+        alert("The start date must precede the end date!");
+        return prevState; // Prevent updating start date
+      } else {
+        return updatedStartDate;
+      }
     });
   };
 
@@ -41,12 +59,29 @@ const DatePicker: FunctionComponent = () => {
     day?: number
   ) => {
     setEndDate((prevState) => {
-      return {
+      const updatedStartDate = {
         ...prevState,
         year: year ?? prevState.year,
         month: month ?? prevState.month,
         day: day ?? prevState.day,
       };
+
+      const isStartDateBeforeEndDate =
+        differenceInCalendarDays(
+          new Date(
+            updatedStartDate.year,
+            updatedStartDate.month,
+            updatedStartDate.day
+          ),
+          new Date(startDate.year, startDate.month, startDate.day)
+        ) < 0;
+
+      if (isStartDateBeforeEndDate) {
+        alert("The end date must come after the start date!");
+        return prevState; // Prevent updating start date
+      } else {
+        return updatedStartDate;
+      }
     });
   };
 
